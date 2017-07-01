@@ -54,7 +54,8 @@ module.exports = function (options) {
     if (options.states &&
         options.states.indexOf(file.s3.state) === -1) return callback(null, file);
 
-    switch (file.s3.state) {
+    // My version can have extra info after the split, so only consider the first word here
+    switch (file.s3.state.split(' ')[0]) {
       case 'update':
       case 'create':
       case 'delete':
